@@ -41,11 +41,37 @@ python3 -m http.server 5185 --bind 127.0.0.1
 http://127.0.0.1:5185/
 ```
 
+## GitHub / live preview
+
+Репозиторий:
+
+```text
+https://github.com/vitaliy-demidov/most-v4-journey-presentation
+```
+
+Публичная GitHub Pages ссылка:
+
+```text
+https://vitaliy-demidov.github.io/most-v4-journey-presentation/
+```
+
+Статус проверки: `HTTP/2 200`, title страницы — `MOST v4.1 — Full Deal Cycle Presentation`.
+
 ## Файл
 
 ```text
 /Users/vitalij/Desktop/most-hermes-v3-ui-redesign/v4.1-journey-presentation/index.html
 ```
+
+## Что проверено
+
+- локально `http://127.0.0.1:5185/` отдаёт `HTTP 200`;
+- GitHub Pages отдаёт `HTTP/2 200`;
+- в браузере открывается правильный title;
+- интерактивная карта содержит 8 шагов;
+- каждый шаг переключает экран Mini App и правый inspector;
+- на каждом шаге есть 3 объяснённые кнопки;
+- browser console: 0 JS errors.
 
 ## Следующий шаг
 
