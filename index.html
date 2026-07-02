@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MOST v4.1 — Full Deal Cycle Presentation</title>
+  <meta name="description" content="MOST v4.1 interactive presentation: from idea to trusted route, deal room, payment and commission." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #060706;
+      --bg2: #0a0c0d;
+      --panel: rgba(18, 21, 20, .78);
+      --panel2: rgba(28, 31, 30, .74);
+      --line: rgba(244, 238, 226, .12);
+      --line2: rgba(244, 238, 226, .22);
+      --text: #f4eee2;
+      --soft: rgba(244, 238, 226, .74);
+      --muted: rgba(244, 238, 226, .50);
+      --faint: rgba(244, 238, 226, .30);
+      --cream: #f2e9d8;
+      --ink: #11100e;
+      --route: #adff5f;
+      --mint: #67e89b;
+      --amber: #f4b86a;
+      --blue: #8bbcff;
+      --violet: #d5b9ff;
+      --red: #ff7979;
+      --shadow: 0 34px 120px rgba(0,0,0,.52);
+      --radius: 28px;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 4%, rgba(173,255,95,.15), transparent 30%),
+        radial-gradient(circle at 85% 0%, rgba(244,184,106,.15), transparent 28%),
+        radial-gradient(circle at 62% 70%, rgba(139,188,255,.11), transparent 38%),
+        linear-gradient(135deg, #050605 0%, #0a0c0e 46%, #111419 100%);
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: 'cv01', 'ss03', 'kern';
+      overflow-x: hidden;
+    }
+    button, textarea, input { font: inherit; }
+    button { cursor: pointer; }
+    .grid-bg {
+      position: fixed; inset: 0; pointer-events: none; opacity: .20;
+      background-image: linear-gradient(rgba(244,238,226,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(244,238,226,.05) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: radial-gradient(circle at center, black, transparent 78%);
+      z-index: 0;
+    }
+    .wrap { position: relative; z-index: 1; width: min(1560px, calc(100vw - 32px)); margin: 0 auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 30;
+      padding: 14px 0 10px;
+      background: linear-gradient(180deg, rgba(6,7,6,.92), rgba(6,7,6,.68) 76%, transparent);
+      backdrop-filter: blur(18px);
+    }
+    .topbar-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 10px 12px;
+      background: rgba(15,17,17,.72);
+      box-shadow: 0 12px 50px rgba(0,0,0,.22);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; min-width: 220px; }
+    .logo {
+      width: 38px; height: 38px; border-radius: 14px;
+      background: conic-gradient(from 220deg, var(--route), var(--amber), var(--blue), var(--route));
+      padding: 1px; flex: 0 0 auto;
+    }
+    .logo > div { height: 100%; border-radius: 13px; background: #0c0f0e; display: grid; place-items: center; font-weight: 900; font-size: 13px; }
+    .brand strong { display: block; letter-spacing: -.035em; font-size: 15px; }
+    .brand span { display: block; font-family: var(--mono); font-size: 10px; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: .06em; }
+    .top-actions { display: flex; gap: 8px; align-items: center; }
+    .btn {
+      border: 1px solid var(--line2); border-radius: 999px; min-height: 40px; padding: 0 14px;
+      background: rgba(244,238,226,.045); color: var(--text); font-weight: 750; font-size: 13px;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+    .btn.primary { background: var(--cream); color: var(--ink); border-color: transparent; }
+    .btn:hover { transform: translateY(-1px); border-color: rgba(173,255,95,.42); }
+    .hero { padding: 24px 0 18px; display: grid; grid-template-columns: .84fr 1.48fr .9fr; gap: 22px; align-items: start; }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background: linear-gradient(180deg, rgba(244,238,226,.058), rgba(244,238,226,.026));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px) saturate(1.18);
+    }
+    .intro { padding: 28px; min-height: 820px; display: flex; flex-direction: column; gap: 18px; }
+    .label { font-family: var(--mono); font-size: 10px; letter-spacing: .11em; text-transform: uppercase; color: var(--muted); }
+    h1 { margin: 0; font-size: clamp(46px, 5.2vw, 86px); line-height: .88; letter-spacing: -.074em; font-weight: 900; text-wrap: balance; }
+    .intro p { color: var(--soft); line-height: 1.54; margin: 0; font-size: 15px; max-width: 38ch; }
+    .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 0 10px;
+      border-radius: 999px; border: 1px solid var(--line); background: rgba(244,238,226,.04);
+      color: var(--soft); font-size: 11px; font-weight: 700; white-space: nowrap;
+    }
+    .badge.route { background: var(--route); color: #14200b; border-color: transparent; }
+    .badge.amber { background: var(--amber); color: #271909; border-color: transparent; }
+    .badge.blue { background: var(--blue); color: #071421; border-color: transparent; }
+    .quick-explain { margin-top: auto; display: grid; gap: 10px; }
+    .mini-row { display: grid; grid-template-columns: 72px 1fr; gap: 12px; padding: 12px; border: 1px solid var(--line); border-radius: 18px; background: rgba(0,0,0,.18); }
+    .mini-row strong { font-size: 12px; }
+    .mini-row span { font-size: 12px; color: var(--muted); line-height: 1.35; }
+    .journey-panel { padding: 14px; overflow: hidden; }
+    .journey-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 6px 12px; }
+    .journey-title h2 { margin: 0; font-size: 20px; letter-spacing: -.04em; }
+    .path-map { display: grid; grid-template-columns: repeat(8, minmax(86px, 1fr)); gap: 8px; }
+    .step {
+      min-height: 114px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(244,238,226,.036);
+      color: var(--soft);
+      padding: 12px;
+      text-align: left;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      position: relative; overflow: hidden;
+    }
+    .step::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(173,255,95,.4), transparent); opacity: 0; }
+    .step:hover { transform: translateY(-2px); border-color: rgba(173,255,95,.35); }
+    .step.active { background: rgba(173,255,95,.13); border-color: rgba(173,255,95,.42); color: var(--text); }
+    .step.active::after { opacity: 1; }
+    .num { font-family: var(--mono); color: var(--route); font-size: 11px; display: block; margin-bottom: 12px; }
+    .step b { display: block; font-size: 12px; line-height: 1.12; letter-spacing: -.02em; margin-bottom: 7px; }
+    .step span { display: block; font-size: 10.5px; color: var(--muted); line-height: 1.32; }
+    .stage-copy { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .copy-box { border: 1px solid var(--line); border-radius: 20px; background: rgba(0,0,0,.18); padding: 13px; min-height: 108px; }
+    .copy-box strong { display: block; font-size: 12px; margin-bottom: 7px; color: var(--text); }
+    .copy-box p { margin: 0; color: var(--muted); font-size: 11.5px; line-height: 1.42; }
+    .demo-stage { display: grid; grid-template-columns: 456px 1fr; gap: 22px; margin-top: 22px; align-items: start; }
+    .phone-card { display: flex; justify-content: center; align-items: center; padding: 20px; }
+    .phone {
+      width: 420px; height: 842px; border-radius: 48px; padding: 12px;
+      background: linear-gradient(180deg, rgba(244,238,226,.22), rgba(244,238,226,.05));
+      border: 1px solid rgba(244,238,226,.26);
+      box-shadow: 0 48px 150px rgba(0,0,0,.62), inset 0 1px 0 rgba(255,255,255,.12);
+    }
+    .screen {
+      height: 100%; border-radius: 38px; overflow: hidden; position: relative;
+      background: radial-gradient(circle at 50% -8%, rgba(173,255,95,.13), transparent 33%), linear-gradient(180deg, #0b0e0d, #060707);
+      border: 1px solid rgba(244,238,226,.13);
+    }
+    .status { height: 38px; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+    .appbar { padding: 4px 18px 12px; display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+    .mini-brand { display: flex; align-items: center; gap: 10px; }
+    .mini-logo { width: 34px; height: 34px; border-radius: 13px; border: 1px solid rgba(173,255,95,.55); display: grid; place-items: center; font-weight: 900; font-size: 12px; }
+    .mini-brand strong { display: block; font-size: 14px; }
+    .mini-brand span { display: block; color: var(--muted); font-size: 10.5px; }
+    .cmd { width: 38px; height: 38px; border-radius: 15px; border: 1px solid var(--line); background: rgba(244,238,226,.04); color: var(--text); }
+    .phone-content { position: absolute; inset: 92px 0 74px; padding: 0 18px 18px; overflow: auto; scrollbar-width: none; }
+    .phone-content::-webkit-scrollbar { display: none; }
+    .command { position: sticky; top: 0; z-index: 3; min-height: 48px; display: flex; align-items: center; gap: 9px; padding: 0 13px; border: 1px solid rgba(244,238,226,.11); border-radius: 18px; background: rgba(13,15,16,.86); backdrop-filter: blur(18px); color: var(--muted); font-size: 12px; margin-bottom: 13px; }
+    .command em { margin-left: auto; font-family: var(--mono); font-style: normal; font-size: 10px; color: var(--faint); border: 1px solid var(--line); padding: 3px 6px; border-radius: 7px; }
+    .phone-title { margin: 8px 0 13px; }
+    .phone-title .label { margin-bottom: 7px; }
+    .phone-title h3 { margin: 0; font-size: 30px; line-height: .96; letter-spacing: -.055em; }
+    .phone-title p { margin: 9px 0 0; color: var(--muted); font-size: 12px; line-height: 1.42; }
+    .phone-block { border: 1px solid var(--line); border-radius: 24px; background: rgba(244,238,226,.035); padding: 13px; margin-bottom: 10px; }
+    .phone-block.hot { border-color: rgba(173,255,95,.35); background: rgba(173,255,95,.08); }
+    .phone-row { display: flex; align-items: flex-start; gap: 10px; padding: 11px; border: 1px solid rgba(244,238,226,.075); border-radius: 17px; background: rgba(0,0,0,.16); margin-top: 8px; }
+    .avatar { width: 36px; height: 36px; border-radius: 14px; display: grid; place-items: center; border: 1px solid var(--line); background: rgba(244,238,226,.06); font-weight: 850; font-size: 12px; flex: 0 0 auto; }
+    .phone-row main { min-width: 0; flex: 1; }
+    .phone-row strong { display: block; font-size: 13px; line-height: 1.24; }
+    .phone-row span { display: block; font-size: 11px; color: var(--muted); line-height: 1.36; margin-top: 4px; }
+    .score { font-family: var(--mono); color: var(--route); font-size: 12px; padding-top: 3px; }
+    .screen-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .screen-actions .wide { grid-column: 1 / -1; }
+    .action {
+      min-height: 46px; border-radius: 18px; border: 1px solid var(--line2); background: rgba(244,238,226,.04); color: var(--text); font-size: 12px; font-weight: 760; padding: 0 10px;
+    }
+    .action.primary { background: var(--cream); color: var(--ink); border-color: transparent; }
+    .action.route { background: var(--route); color: #14200b; border-color: transparent; }
+    .action:focus { outline: 2px solid rgba(173,255,95,.5); outline-offset: 2px; }
+    .progress { position: absolute; left: 12px; right: 12px; bottom: 12px; height: 54px; border: 1px solid var(--line); border-radius: 23px; background: rgba(13,15,16,.88); display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; padding: 6px; }
+    .dot { border: 0; border-radius: 18px; background: transparent; color: var(--muted); font-family: var(--mono); font-size: 10px; font-weight: 800; }
+    .dot.active { background: var(--route); color: #14200b; }
+    .inspector { padding: 20px; min-height: 884px; }
+    .inspector-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .inspector h2 { margin: 0; font-size: 28px; line-height: 1; letter-spacing: -.055em; }
+    .inspector-sub { margin: 8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.42; }
+    .explain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .explain { border: 1px solid var(--line); border-radius: 20px; background: rgba(0,0,0,.16); padding: 13px; min-height: 120px; }
+    .explain strong { display: block; font-size: 12px; margin-bottom: 8px; }
+    .explain p, .explain li { color: var(--muted); font-size: 11.5px; line-height: 1.42; }
+    .explain p { margin: 0; }
+    .explain ul { margin: 0; padding-left: 16px; }
+    .action-list { margin-top: 12px; display: grid; gap: 8px; }
+    .action-item { border: 1px solid var(--line); border-radius: 18px; background: rgba(244,238,226,.032); padding: 12px; display: grid; grid-template-columns: 84px 1fr; gap: 10px; }
+    .action-item b { font-size: 11px; color: var(--route); font-family: var(--mono); }
+    .action-item span { font-size: 12px; color: var(--soft); line-height: 1.38; }
+    .selected-action { margin-top: 12px; border-radius: 24px; border: 1px solid rgba(173,255,95,.32); background: rgba(173,255,95,.08); padding: 15px; min-height: 125px; }
+    .selected-action strong { display: block; font-size: 13px; margin-bottom: 8px; }
+    .selected-action p { margin: 0; color: var(--soft); font-size: 12px; line-height: 1.45; }
+    .auto { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .deep-section { margin: 28px auto 0; padding-bottom: 50px; }
+    .section-header { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin: 0 0 14px; }
+    .section-header h2 { margin: 0; font-size: clamp(32px, 4vw, 58px); line-height: .93; letter-spacing: -.065em; max-width: 850px; }
+    .section-header p { margin: 0; color: var(--muted); max-width: 420px; line-height: 1.45; }
+    .cycle-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .cycle-card { border: 1px solid var(--line); border-radius: 26px; background: rgba(244,238,226,.035); padding: 16px; min-height: 218px; }
+    .cycle-card .num { margin-bottom: 16px; }
+    .cycle-card h3 { margin: 0 0 10px; font-size: 18px; letter-spacing: -.04em; line-height: 1.08; }
+    .cycle-card p { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.45; }
+    .button-map { margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .button-card { border: 1px solid var(--line); border-radius: 24px; background: linear-gradient(180deg, rgba(244,238,226,.048), rgba(244,238,226,.02)); padding: 15px; }
+    .button-card strong { display: block; font-size: 14px; margin-bottom: 8px; }
+    .button-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .button-card .badge { margin-top: 10px; }
+    .delivery { margin-top: 16px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 12px; }
+    .delivery .card { padding: 20px; box-shadow: none; }
+    .delivery code { display: block; padding: 12px; border: 1px solid var(--line); border-radius: 16px; background: rgba(0,0,0,.25); color: var(--soft); white-space: pre-wrap; font-family: var(--mono); font-size: 12px; line-height: 1.45; }
+    @media (max-width: 1280px) {
+      .hero { grid-template-columns: 1fr; }
+      .intro { min-height: auto; }
+      .demo-stage { grid-template-columns: 1fr; }
+      .phone-card { order: 2; }
+      .inspector { min-height: auto; }
+      .path-map { grid-template-columns: repeat(4, 1fr); }
+      .cycle-grid { grid-template-columns: repeat(2, 1fr); }
+      .button-map { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .wrap { width: min(100vw - 20px, 520px); }
+      .topbar-inner, .section-header, .delivery { display: block; }
+      .top-actions { margin-top: 10px; }
+      h1 { font-size: 52px; }
+      .path-map, .stage-copy, .explain-grid, .cycle-grid, .button-map { grid-template-columns: 1fr; }
+      .phone { width: min(420px, 100%); height: 812px; }
+      .phone-card { padding: 10px; }
+      .action-item, .mini-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand"><div class="logo"><div>M</div></div><div><strong>MOST v4.1</strong><span>full cycle presentation</span></div></div>
+      <div class="top-actions">
+        <button class="btn" id="prevStep">← назад</button>
+        <button class="btn primary" id="autoPlay">▶ провести демо</button>
+        <button class="btn" id="nextStep">дальше →</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section class="hero">
+      <aside class="intro card">
+        <span class="label">MOST v4.1 / интерактивная ссылка для показа</span>
+        <h1>От идеи до заработанного процента.</h1>
+        <p>Это презентация, которую можно отправить человеку: сверху он видит всю карту пути, в центре — живой экран Mini App, справа — прозрачное объяснение каждой кнопки и логики.</p>
+        <div class="hero-badges">
+          <span class="badge route">8 шагов</span>
+          <span class="badge amber">логика сделки</span>
+          <span class="badge blue">кликабельный прототип</span>
+        </div>
+        <div class="quick-explain">
+          <div class="mini-row"><strong>Для кого</strong><span>Предприниматель, клуб, партнёр, инвестор или команда: человек без контекста поймёт весь цикл.</span></div>
+          <div class="mini-row"><strong>Что видно</strong><span>Профиль, запрос, маршруты, интерес, deal room, оплата, процент, обучение системы.</span></div>
+          <div class="mini-row"><strong>Как смотреть</strong><span>Нажимать шаги сверху или кнопки внутри телефона. Экран и объяснение синхронно меняются.</span></div>
+        </div>
+      </aside>
+
+      <section class="journey-panel card">
+        <div class="journey-title"><h2>Карта цикла MOST</h2><span class="badge">нажмите любой шаг</span></div>
+        <div class="path-map" id="pathMap"></div>
+        <div class="stage-copy" id="stageCopy"></div>
+        <div class="demo-stage">
+          <div class="phone-card card">
+            <div class="phone">
+              <div class="screen">
+                <div class="status"><span>13:58</span><span>●●●● 100%</span></div>
+                <div class="appbar"><div class="mini-brand"><div class="mini-logo">M</div><div><strong>MOST</strong><span>trust route layer</span></div></div><button class="cmd" data-action="command">⌘</button></div>
+                <div class="phone-content" id="phoneContent"></div>
+                <div class="progress" id="phoneProgress"></div>
+              </div>
+            </div>
+          </div>
+          <aside class="inspector card">
+            <div class="inspector-head"><div><span class="label" id="inspectorLabel">Шаг 01</span><h2 id="inspectorTitle">Идея</h2><p class="inspector-sub" id="inspectorSub"></p></div><span class="badge route" id="stageBadge">start</span></div>
+            <div class="explain-grid" id="explainGrid"></div>
+            <div class="action-list" id="actionList"></div>
+            <div class="selected-action" id="selectedAction"><strong>Выберите кнопку на экране</strong><p>Здесь появится объяснение: зачем кнопка нужна, что происходит в логике, какие данные создаются и какой следующий шаг.</p></div>
+            <div class="auto"><button class="btn primary" id="advanceFromPanel">Следующий шаг</button><button class="btn" id="scrollCycle">Прокрутить подробный цикл ↓</button></div>
+          </aside>
+        </div>
+      </section>
+    </section>
+
+    <section class="deep-section" id="cycleDetails">
+      <div class="section-header">
+        <h2>Подробный цикл: что происходит от А до денег</h2>
+        <p>Ниже — объяснение для человека, который вообще не знает продукт. Можно читать как сценарий демо, а можно кликать сверху и смотреть, как меняется экран.</p>
+      </div>
+      <div class="cycle-grid" id="cycleGrid"></div>
+      <div class="section-header" style="margin-top:28px">
+        <h2>Карта кнопок и смысла</h2>
+        <p>Каждая кнопка в v4.1 не декоративная: она двигает пользователя по цепочке сделки и фиксирует данные для route intelligence.</p>
+      </div>
+      <div class="button-map" id="buttonMap"></div>
+      <div class="delivery">
+        <div class="card">
+          <span class="label">что сохраняем как MOST v4</span>
+          <h2 style="margin:10px 0 12px;font-size:30px;letter-spacing:-.05em;line-height:1">v4 — визуальная система, v4.1 — презентационный сценарий.</h2>
+          <p style="margin:0;color:var(--muted);line-height:1.5">v4 показал новый язык: Trust Route OS. v4.1 связывает этот язык с настоящей логикой продукта: человек проходит полный цикл, понимает кнопки, видит конечный результат — сделка и процент.</p>
+        </div>
+        <div class="card">
+          <span class="label">пути</span>
+          <code>Локально: /v4.1-journey-presentation/index.html
+GitHub Pages: будет добавлен после deploy
+Текущий React frontend: GlimmerCard/frontend
+Следующий шаг: перенос v4.1 shell в React</code>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const steps = [
+      {
+        id:'idea', n:'01', badge:'start', title:'Идея / намерение', short:'У человека есть запрос, возможность или бизнес-идея.',
+        screen:'Идея превращается в действие', command:'Опишите идею, запрос или возможность',
+        text:'MOST начинает не с анкеты, а с намерения: что человек хочет получить, кому может быть полезен и где может появиться сделка.',
+        human:'Пользователь видит простой вход: не “заполни всё”, а “расскажи, что хочешь сделать”.',
+        system:'Система фиксирует стартовый контекст: роль, цель, возможный результат, категорию сделки.',
+        business:'Ценность появляется сразу: идея перестаёт быть заметкой и становится объектом для маршрутизации.',
+        result:'На выходе появляется первый структурированный объект: намерение пользователя.',
+        rows:[['Идея','Хочу найти партнёров для пилота MOST в бизнес-клубах.','seed'],['Возможность','Могу помочь клубу выстроить Telegram Mini App и маршрут к сделкам.','offer']],
+        actions:[['Начать цифровку','Переводит идею в trust profile: кто я, что могу, что ищу.','primary'],['Сразу создать запрос','Открывает быстрый композер запроса без полной анкеты.','normal'],['Открыть пример цикла','Показывает весь путь 1→8 для новых пользователей.','normal']]
+      },
+      {
+        id:'profile', n:'02', badge:'profile', title:'Цифровка профиля', short:'Кто я, что могу, что ищу — в структуру доверия.',
+        screen:'Trust profile', command:'Заполнить профиль доверия',
+        text:'Профиль в MOST — не визитка. Это карта полезности: компетенции, запросы, доверие, связи, завершённые сделки.',
+        human:'Человек понимает, какие данные нужны не ради формы, а ради точного маршрута.',
+        system:'Создаются capability/request vectors, trust markers и базовая карта роли в сети.',
+        business:'Чем точнее профиль, тем выше шанс релевантного интро и будущей сделки.',
+        result:'Пользователь стал понятен системе: кому он полезен и кто полезен ему.',
+        rows:[['Кто я','Основатель MOST, строю B2B route-to-deal систему.','identity'],['Что могу','Продукт, Mini Apps, партнёрские системы, GTM.','can'],['Что ищу','Клубы, предприниматели, пилоты, партнёры.','need']],
+        actions:[['Сохранить профиль','Фиксирует структуру пользователя и открывает создание запроса.','primary'],['Добавить возможность','Создаёт новый capability, по нему система будет искать спрос.','route'],['Добавить запрос','Создаёт demand-сигнал для будущего matching.','normal']]
+      },
+      {
+        id:'request', n:'03', badge:'request', title:'Запрос / предложение', short:'Идея формулируется как рыночный запрос или оффер.',
+        screen:'Создание запроса', command:'Что нужно найти или предложить?',
+        text:'Пользователь описывает результат: кого ищет, зачем, какие условия, какой первый шаг и что будет считаться успехом.',
+        human:'Вместо мутного “ищу связи” он пишет конкретный бизнес-сценарий.',
+        system:'Запрос нормализуется: категория, критерии, сроки, deal intent, риск, ожидаемая ценность.',
+        business:'Появляется предмет маршрутизации: система понимает, кого искать и что предлагать.',
+        result:'Создан listing/request — объект, вокруг которого строятся маршруты.',
+        rows:[['Запрос','Найти 3–5 клубов для пилота MOST на предпринимателях.','demand'],['Условия','Демо 25 минут, пилот 30 дней, white-label опционально.','terms']],
+        actions:[['Построить маршруты','Запускает route intelligence по запросу.','primary'],['Уточнить условия','Добавляет цену, сроки, формат пилота, критерии успеха.','normal'],['Сохранить черновик','Сохраняет запрос, если пользователь вернётся позже.','normal']]
+      },
+      {
+        id:'routes', n:'04', badge:'match', title:'Route Intelligence', short:'Не список людей, а причины связаться и мосты доверия.',
+        screen:'Маршруты', command:'Найти лучший маршрут к сделке',
+        text:'MOST показывает кандидатов как маршруты: почему этот человек, какой мост, какой шанс, что сказать и какой следующий шаг.',
+        human:'Пользователь видит не “100 анкет”, а 3–5 понятных направлений действия.',
+        system:'Считаются semantic fit, network fit, journey fit и объяснение рекомендации.',
+        business:'Сокращается путь от запроса к нужному человеку: меньше шума, выше вероятность сделки.',
+        result:'Выбран конкретный маршрут и кандидат для интро/интереса.',
+        rows:[['Мария Орлова','Клуб предпринимателей, хочет Telegram-воронку и пилот.','96'],['Антон Ковалёв','Enterprise sales, может открыть B2B-каналы.','89'],['Елена Соколова','Инвестор, интересуется closed networks.','82']],
+        actions:[['Проявить интерес','Создаёт interest и открывает интро-сценарий.','primary'],['Почему этот маршрут?','Показывает объяснение: смысл, доверие, похожие сделки.','route'],['Сравнить маршруты','Открывает compare-режим, чтобы выбрать лучший путь.','normal']]
+      },
+      {
+        id:'interest', n:'05', badge:'intro', title:'Интерес / анонимное интро', short:'Безопасный первый контакт без раскрытия лишнего.',
+        screen:'Интро', command:'Подготовить первое сообщение',
+        text:'Пользователь отправляет интерес. MOST помогает сформулировать сообщение, где понятны контекст, польза и безопасный следующий шаг.',
+        human:'Не надо думать, что писать незнакомому человеку: система собирает сильное интро.',
+        system:'Создаётся Interest, фиксируется source route, предотвращаются дубли, готовится chat/deal context.',
+        business:'Первый контакт становится прозрачным и не выглядит спамом.',
+        result:'Интерес принят, открывается чат или ожидание ответа.',
+        rows:[['Кому','Мария Орлова · клуб предпринимателей','target'],['Сообщение','Предлагаю показать MOST на 3 реальных запросах вашего клуба.','draft']],
+        actions:[['Отправить интерес','Создаёт interest и уведомляет вторую сторону.','primary'],['Сделать анонимно','Скрывает личность до взаимного интереса/подтверждения.','normal'],['Улучшить текст','AI переписывает интро под деловой тон.','route']]
+      },
+      {
+        id:'dealroom', n:'06', badge:'deal room', title:'Deal Room', short:'Чат превращается в рабочую комнату сделки.',
+        screen:'Рабочая комната сделки', command:'Согласовать условия и следующий шаг',
+        text:'MOST показывает не только сообщения, но и стадию сделки: интро, условия, оплата, выполнение, завершение.',
+        human:'Человек понимает, где он в процессе и что нужно сделать дальше.',
+        system:'Сообщения привязаны к listingId/dealId, условия структурируются, события пишутся в journey.',
+        business:'Меньше потерянных договорённостей, выше шанс довести разговор до денег.',
+        result:'Согласованы предмет сделки, следующий шаг и условия пилота.',
+        rows:[['Предмет','Пилот MOST для клуба на 30 участников.','scope'],['Следующий шаг','Созвон 25 минут и демо на живом запросе.','next'],['Условия','30 дней, KPI: 5 интро, 1–2 сделки.','terms']],
+        actions:[['Зафиксировать условия','Создаёт deal draft с предметом, суммой и этапом.','primary'],['Назначить созвон','Добавляет next action и уведомление.','normal'],['Позвать куратора','Подключает доверенного модератора/арбитра.','normal']]
+      },
+      {
+        id:'payment', n:'07', badge:'money', title:'Оплата / фиксация', short:'Договорённость становится транзакцией.',
+        screen:'Оплата и фиксация сделки', command:'Перевести договорённость в оплату',
+        text:'После условий MOST показывает понятный платёжный/фиксационный контур: сумма, комиссия, статус, что будет после оплаты.',
+        human:'Пользователь видит, за что платит, какой статус и что дальше.',
+        system:'Deal переходит в AWAITING_PAYMENT → PAID → IN_PROGRESS, пишутся события deal_paid и payment intent.',
+        business:'Появляется доказанная коммерческая ценность, не просто “полезный контакт”.',
+        result:'Сделка оплачена или зафиксирована, можно выполнять пилот.',
+        rows:[['Сумма пилота','90 000 ₽','amount'],['Комиссия MOST','7% после оплаты / успешной сделки','percent'],['Статус','ожидает оплаты','status']],
+        actions:[['Оплатить / зафиксировать','Переводит сделку в paid/fixed контур.','primary'],['Показать условия','Раскрывает договорённости и правила комиссии.','normal'],['Открыть спор','Если условия нарушены, создаёт dispute/arbitration.','normal']]
+      },
+      {
+        id:'result', n:'08', badge:'loop', title:'Процент / обучение системы', short:'Сделка завершена, MOST заработал и стал умнее.',
+        screen:'Результат и память маршрута', command:'Зафиксировать результат сделки',
+        text:'После завершения MOST показывает результат: выполнено, кто помог, какой процент/комиссия, чему система научилась для следующих маршрутов.',
+        human:'Человек видит финал: не просто контакт, а заработанный результат и понятная история сделки.',
+        system:'Пишутся deal_completed, review, route success, journey transition. Рейтинг и будущие рекомендации улучшаются.',
+        business:'MOST получает комиссию/подписочную ценность и данные, которые улучшают следующие сделки.',
+        result:'Цикл замкнулся: идея → маршрут → сделка → деньги → обучающая память.',
+        rows:[['Итог','Пилот запущен, 2 интро, 1 оплаченная сделка.','done'],['Доход MOST','6 300 ₽ комиссия с пилота 90 000 ₽.','money'],['Память','Маршрут клуб → запрос → интро → сделка улучшает future ranking.','learn']],
+        actions:[['Завершить сделку','Фиксирует COMPLETED и открывает отзыв.','primary'],['Оставить отзыв','Усиливает trust graph и репутацию.','route'],['Найти похожие маршруты','Запускает следующий цикл по накопленному опыту.','normal']]
+      }
+    ];
+
+    let active = 0;
+    let autoplayTimer = null;
+    const el = (id) => document.getElementById(id);
+    const esc = (s) => String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+
+    function renderPath() {
+      el('pathMap').innerHTML = steps.map((s, i) => `<button class="step ${i===active?'active':''}" data-step="${i}"><span class="num">${s.n}</span><b>${esc(s.title)}</b><span>${esc(s.short)}</span></button>`).join('');
+      document.querySelectorAll('.step').forEach(b => b.onclick = () => setStep(Number(b.dataset.step)));
+    }
+    function renderStageCopy(s) {
+      el('stageCopy').innerHTML = `
+        <div class="copy-box"><strong>Что видит человек</strong><p>${esc(s.human)}</p></div>
+        <div class="copy-box"><strong>Что делает система</strong><p>${esc(s.system)}</p></div>
+        <div class="copy-box"><strong>Бизнес-смысл</strong><p>${esc(s.business)}</p></div>`;
+    }
+    function rowHtml(r) {
+      return `<div class="phone-row"><div class="avatar">${esc(r[2]).slice(0,2)}</div><main><strong>${esc(r[0])}</strong><span>${esc(r[1])}</span></main><div class="score">${esc(r[2])}</div></div>`;
+    }
+    function renderPhone(s) {
+      el('phoneContent').innerHTML = `
+        <div class="command">🔎 ${esc(s.command)} <em>${esc(s.badge)}</em></div>
+        <div class="phone-title"><div class="label">${s.n} / ${esc(s.badge)}</div><h3>${esc(s.screen)}</h3><p>${esc(s.text)}</p></div>
+        <div class="phone-block hot">${s.rows.map(rowHtml).join('')}</div>
+        <div class="screen-actions">${s.actions.map((a, idx) => `<button class="action ${a[2] === 'primary' ? 'primary wide' : a[2] === 'route' ? 'route' : ''}" data-action-index="${idx}">${esc(a[0])}</button>`).join('')}</div>`;
+      document.querySelectorAll('[data-action-index]').forEach(btn => btn.onclick = () => selectAction(Number(btn.dataset.actionIndex)));
+      el('phoneProgress').innerHTML = steps.map((x, i) => `<button class="dot ${i===active?'active':''}" data-dot="${i}">${i+1}</button>`).join('');
+      document.querySelectorAll('.dot').forEach(d => d.onclick = () => setStep(Number(d.dataset.dot)));
+    }
+    function renderInspector(s) {
+      el('inspectorLabel').textContent = `Шаг ${s.n}`;
+      el('inspectorTitle').textContent = s.title;
+      el('inspectorSub').textContent = s.result;
+      el('stageBadge').textContent = s.badge;
+      el('explainGrid').innerHTML = `
+        <div class="explain"><strong>Зачем это нужно</strong><p>${esc(s.text)}</p></div>
+        <div class="explain"><strong>Какие данные появляются</strong><ul><li>Контекст пользователя и роли</li><li>Сигналы спроса/предложения</li><li>События journey для будущего ranking</li></ul></div>`;
+      el('actionList').innerHTML = s.actions.map((a, i) => `<div class="action-item"><b>кнопка ${i+1}</b><span><strong>${esc(a[0])}</strong><br>${esc(a[1])}</span></div>`).join('');
+      selectAction(0, false);
+    }
+    function selectAction(i, pulse=true) {
+      const s = steps[active];
+      const a = s.actions[i] || s.actions[0];
+      el('selectedAction').innerHTML = `<strong>${esc(a[0])}</strong><p>${esc(a[1])}<br><br><b style="color:var(--route)">Следствие:</b> ${esc(s.result)}</p>`;
+      if (pulse) el('selectedAction').animate([{transform:'scale(.992)'},{transform:'scale(1)'}], {duration:180, easing:'ease-out'});
+    }
+    function setStep(i) {
+      active = (i + steps.length) % steps.length;
+      const s = steps[active];
+      renderPath(); renderStageCopy(s); renderPhone(s); renderInspector(s);
+    }
+    function renderDeep() {
+      el('cycleGrid').innerHTML = steps.map(s => `<article class="cycle-card"><span class="num">${s.n}</span><h3>${esc(s.title)}</h3><p>${esc(s.text)}<br><br><b style="color:var(--route)">Итог:</b> ${esc(s.result)}</p></article>`).join('');
+      el('buttonMap').innerHTML = steps.flatMap(s => s.actions.map((a, i) => `<article class="button-card"><strong>${esc(a[0])}</strong><p>${esc(a[1])}</p><span class="badge ${a[2] === 'primary' ? 'route' : a[2] === 'route' ? 'blue' : ''}">${s.n} · ${esc(s.title)}</span></article>`)).join('');
+    }
+    function startAuto() {
+      if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; el('autoPlay').textContent = '▶ провести демо'; return; }
+      el('autoPlay').textContent = '⏸ остановить';
+      autoplayTimer = setInterval(() => setStep(active + 1), 2300);
+    }
+    document.getElementById('prevStep').onclick = () => setStep(active - 1);
+    document.getElementById('nextStep').onclick = () => setStep(active + 1);
+    document.getElementById('advanceFromPanel').onclick = () => setStep(active + 1);
+    document.getElementById('autoPlay').onclick = startAuto;
+    document.getElementById('scrollCycle').onclick = () => document.getElementById('cycleDetails').scrollIntoView({behavior:'smooth'});
+    document.querySelector('[data-action="command"]').onclick = () => {
+      el('selectedAction').innerHTML = `<strong>⌘ Command layer</strong><p>Командный слой нужен, чтобы человек мог быстро управлять маршрутом: создать запрос, открыть сделку, сравнить кандидатов или продолжить цикл. Это вдохновлено Raycast/Superhuman, но применено к MOST.</p>`;
+    };
+    renderDeep();
+    setStep(0);
+  </script>
+</body>
+</html>
